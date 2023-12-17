@@ -19,13 +19,14 @@ public class Main {
         dc.setCapability("appActivity", "com.rookie.catatankeuangan.feature.splash.SplashActivity");
         dc.setCapability("noReset", "true");
         URL url = new URL("https://127.0.0.1:4723/wd/hub");
+        AndroidDriver driver =  new AndroidDriver(url, dc);
 
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        AndroidDriver driver =  new AndroidDriver(url, dc);
+
         //tombol tambah
         MobileElement btnAdd = (MobileElement) driver.findElementById("com.chad.financialrecord:id/fabMenu");
 
@@ -68,6 +69,11 @@ public class Main {
         btnSave.click();
 
         System.out.println(hasilPemasukan.getText());
+        if (hasilPemasukan.getText().contains("50.000")){
+            System.out.println("passed");
+        } else {
+            System.out.println("failed");
+        }
 
         //action pengeluaran
         btnAdd.click();
@@ -82,6 +88,11 @@ public class Main {
         btnSave.click();
 
         System.out.println(hasilPengeluaran.getText());
+        if (hasilPengeluaran.getText().contains("20.000")){
+            System.out.println("passed");
+        } else {
+            System.out.println("failed");
+        }
 
         //saldo
         System.out.println(saldo.getText());
